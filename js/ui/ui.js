@@ -51,7 +51,6 @@ export function displayPrices(prices) {
         card.append(title, price, unit, freshness);
         priceCards.appendChild(card);
     });
-
     if (prices.length > 0) {
         lastUpdated.textContent =
             new Date(prices[0].updatedAt).toLocaleString("fr-FR");

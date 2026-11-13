@@ -1,0 +1,21 @@
+{
+  "name": "mizan",
+  "version": "1.0.0",
+  "description": "Application web permettant de consulter les cours actuels de l'or et de l'argent en temps réel, avec conversion en différentes devises, historique des prix et estimation de bijoux selon leur poids.",
+  "homepage": "https://github.com/HolyAtomic/Mizan#readme",
+  "bugs": {
+    "url": "https://github.com/HolyAtomic/Mizan/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HolyAtomic/Mizan.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+"scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview"
+}
+}
