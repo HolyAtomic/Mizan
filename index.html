@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mizan</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <script type="module" src="/js/main.js" defer></script>
+    </head>
+    
+<body class="bg-gray-50 text-slate-900">
+
+    <!-- Navbar -->
+    <header class="bg-slate-900 text-white">
+            <a href="index.html" class="px-5 py-4 flex justify-center items-center gap-3">
+                <img src="images/budget-balance.png" alt="mizan" class="h-10 w-10">
+                <h1 class="text-2xl font-bold text-yellow-1400">Mizan</h1>
+            </a>
+    </header>
+
+
+    <main class="max-w-6xl mx-auto px-5 py-10">
+
+        <!-- Accueil -->
+        <section id="accueil">
+
+            <div class="flex flex-col md:flex-row justify-between gap-5 mb-8">
+
+                <div>
+                    <h2 class="text-3xl font-bold">
+                        Cours des métaux du jour
+                    </h2>
+
+                    <p class="text-gray-500 mt-2">
+                        Consultez les prix de l'or et de l'argent.
+                    </p>
+                </div>
+
+                <div class="flex gap-3">
+
+                    <select id="currency"
+                        class="border border-gray-300 rounded-lg px-4 py-2 bg-white">
+                        <option value="MAD">MAD</option>
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                    </select>
+
+                    <button id="refresh-btn"
+                        class="bg-slate-900 text-white px-5 py-2 rounded-lg hover:bg-slate-700">
+                        Actualiser
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Status -->
+            <div id="request-status"
+                role="status"
+                aria-live="polite"
+                class="mb-5 text-gray-500">
+                En attente des prix...
+            </div>
+
+            <div id="error-message"
+                role="alert"
+                class="hidden bg-red-100 text-red-700 p-4 rounded-lg mb-5">
+
+                <p id="error-text"></p>
+
+                <button id="retry-btn" class="underline font-bold mt-2">
+                    Réessayer
+                </button>
+
+            </div>
+
+
+            <!-- Price Cards -->
+            <div id="price-cards"
+                class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                <!-- Les cartes seront ajoutées avec JavaScript -->
+
+            </div>
+
+
+            <p class="text-gray-500 text-sm mt-5">
+                Dernière mise à jour :
+                <span id="last-updated">--</span>
+            </p>
+
+        </section>
+
+
+        <!-- Historique -->
+        <section id="historique" class="mt-14">
+
+            <div class="bg-white rounded-xl shadow-sm p-6">
+
+                <h2 class="text-2xl font-bold mb-6">
+                    Historique des prix
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+
+                    <div>
+                        <label for="history-metal" class="block mb-2">
+                            Choisir un métal
+                        </label>
+
+                        <select id="history-metal"
+                            class="w-full border rounded-lg p-3 bg-white">
+                            <option value="XAU">Gold (XAU)</option>
+                            <option value="XAG">Silver (XAG)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="history-period" class="block mb-2">
+                            Choisir une période
+                        </label>
+
+                        <select id="history-period"
+                            class="w-full border rounded-lg p-3 bg-white">
+                            <option value="7">7 derniers jours</option>
+                            <option value="30">30 derniers jours</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div id="history-status"
+                    role="status"
+                    class="text-gray-500 mb-3">
+                </div>
+
+                <div id="history-chart"
+                    class="min-h-64 border rounded-lg p-4 flex items-center justify-center text-gray-400">
+
+                    Le graphique apparaîtra ici.
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Estimateur -->
+        <section id="estimateur" class="mt-14">
+
+            <div class="bg-white rounded-xl shadow-sm p-6">
+
+                <h2 class="text-2xl font-bold mb-6">
+                    Estimateur de bijou
+                </h2>
+
+                <form id="calculator-form" class="space-y-5">
+
+                    <div>
+                        <label for="metal" class="block mb-2">
+                            Métal
+                        </label>
+
+                        <select id="metal"
+                            class="w-full border rounded-lg p-3 bg-white">
+
+                            <option value="XAU">Gold (XAU)</option>
+                            <option value="XAG">Silver (XAG)</option>
+
+                        </select>
+                    </div>
+
+
+                    <div>
+                        <label for="weight" class="block mb-2">
+                            Poids en grammes
+                        </label>
+
+                        <input type="number"
+                            id="weight"
+                            min="0"
+                            step="any"
+                            placeholder="Exemple : 15"
+                            class="w-full border rounded-lg p-3">
+
+                        <p id="weight-error"
+                            role="alert"
+                            class="text-red-600 text-sm mt-2">
+                        </p>
+                    </div>
+
+
+                    <button type="submit"
+                        id="calculate-btn"
+                        class="w-full bg-slate-900 text-white p-3 rounded-lg hover:bg-slate-700">
+
+                        Estimer la valeur
+
+                    </button>
+
+                </form>
+
+
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-5 mt-6">
+
+                    <p class="text-gray-600">
+                        Valeur estimée
+                    </p>
+
+                    <h3 id="estimated-value"
+                        aria-live="polite"
+                        class="text-2xl font-bold text-yellow-700 mt-2">
+                        --
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Journal -->
+        <section id="journal" class="mt-10 mb-8">
+
+            <h2 class="text-2xl font-bold mb-4">
+                Journal des requêtes
+            </h2>
+
+            <div class="bg-white rounded-lg p-4 shadow">
+
+                <table class="w-full text-left">
+
+                    <tr>
+                        <th class="p-2">Méthode</th>
+                        <th class="p-2">URL</th>
+                        <th class="p-2">Statut</th>
+                        <th class="p-2">Durée</th>
+                    </tr>
+
+                    <tbody id="request-log">
+                    </tbody>
+
+                </table>
+
+                <p id="empty-log" class="text-gray-500 mt-4">
+                    Aucune requête enregistrée.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white text-center p-6">
+
+        <h2 class="font-bold text-yellow-400 text-xl">
+            Mizan
+        </h2>
+
+        <p class="text-sm text-gray-300 mt-2">
+            Al Andalous Bijouterie - Nador
+        </p>
+
+    </footer>
+
+
+
+</body>
+</html>
